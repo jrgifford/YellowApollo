@@ -1,4 +1,13 @@
-%h1 Systems Overview:
-%p
-  Make a new VM
-  %input{type => "submit", :value = "Start it up!"}
+%h1 Systems Overview
+
+%p Vagrant boxes:
+%p=Vagrant::Command::BoxList
+%p Vagrant status:
+%p=`vagrant status`
+%a{ :href => '/suspend' }
+  %h1 Suspend thar' VM there lad!
+%a{ :href => '/shutdown' }
+  %h1 SHUT 'ER DOWN CAPUN!
+
+%a{ :href => '/startup' }
+  %h1 Start your engines!
