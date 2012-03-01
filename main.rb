@@ -25,3 +25,9 @@ get '/suspend' do
   `vagrant suspend`
 end
 
+get '/init' do
+  @title = "Initializing VM..."
+  haml :init
+  `vagrant init`
+end
+
