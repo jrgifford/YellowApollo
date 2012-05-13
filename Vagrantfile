@@ -7,7 +7,33 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "base"
+
+  config.vm.define :lucid32_master do |master|
+    master.vm.box = "lucid32"
+    
+    master.vm.network :bridged
+    
+    master.vm.box_url = "http://files.vagrantup.com/lucid32.box"
+  end
+
+  
+  config.vm.define :precise32_slave do |precise_slave_config|
+    precise_slave_config.vm.box = "precise32"
+    
+    precise_slave_config.vm.network :bridged    
+    precise_slave_config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+  end
+  
+  config.vm.define :precise32_web do |precise_web_config|
+    precise_web_config.vm.box = "precise32"
+    
+    precise_web_config.vm.provision :puppet  do |puppet|
+     puppet.manifests_path = "manifests"
+     puppet.manifest_file  = "base.pp"
+    end
+    
+    precise_web_config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+  end
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
