@@ -7,10 +7,11 @@ get '/' do
   haml :index
 end
 
-get '/shutdown' do
+get '/shutdown/:name' do
+  params[:name]
   @title = "Shutting Down..."
   haml :shutdown
-  `vagrant halt`
+  `vagrant halt #{params[:name]}`
 end
 
 get '/startup' do
